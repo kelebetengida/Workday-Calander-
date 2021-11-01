@@ -30,7 +30,7 @@ Moment
 
 # Deployed Link
 
-https://kelebetengida.github.io/Fitness-Tracker/
+https://kelebetengida.github.io/Workday-Calander-/
 
 # Mock up
 
