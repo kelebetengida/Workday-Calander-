@@ -1,42 +1,60 @@
-//Declare the "curentDate"
-$(document).ready(function(){
+// Display today's day and date
+var todayDate = moment().format('dddd, MMM Do YYYY');
+$("#currentDay").html(todayDate);
 
+$(document).ready(function () {
+    // saveBtn click listener 
+    $(".saveBtn").on("click", function () {
+        // Get nearby values of the description in JQuery
+        var text = $(this).siblings(".description").val();
+        var time = $(this).parent().attr("id");
 
-//What is today's date in the following format: Jan 1st, 1999?
-var today = moment();
-$("#currentDay").text(today.format("MMM Do, YYYY"));
+        // Save text in local storage
+        localStorage.setItem(time, text);
+    })
+   
+    function timeTracker() {
+        //get current number of hours.
+        var timeNow = moment().hour();
 
+        // loop over time blocks
+        $(".time-block").each(function () {
+            var blockTime = parseInt($(this).attr("id").split("hour")[1]);
 
-//Decalre the "currentHour" to compare the curent our to the block time so that the calander know what time it is.
+            // To check the time and add the classes for background indicators
+            if (blockTime < timeNow) {
+                $(this).removeClass("future");
+                $(this).removeClass("present");
+                $(this).addClass("past");
+            }
+            else if (blockTime === timeNow) {
+                $(this).removeClass("past");
+                $(this).removeClass("future");
+                $(this).addClass("present");
+            }
+            else {
+                $(this).removeClass("present");
+                $(this).removeClass("past");
+                $(this).addClass("future");
 
-// save text area to local storage
+            }
+        })
+    }
 
-$('.saveBtn').on ("click", function(){
-    var time= $(this).attr("id")
-    var text=$(this).siblings("textarea").val()
-    localStorage.setItem(time,text)
+    // Get item from local storage if any
+    $("#hour8 .description").val(localStorage.getItem("hour8"));
+    $("#hour9 .description").val(localStorage.getItem("hour9"));
+    $("#hour10 .description").val(localStorage.getItem("hour10"));
+    $("#hour11 .description").val(localStorage.getItem("hour11"));
+    $("#hour12 .description").val(localStorage.getItem("hour12"));
+    $("#hour13 .description").val(localStorage.getItem("hour13"));
+    $("#hour14 .description").val(localStorage.getItem("hour14"));
+    $("#hour15 .description").val(localStorage.getItem("hour15"));
+    $("#hour16 .description").val(localStorage.getItem("hour16"));
+    $("#hour17 .description").val(localStorage.getItem("hour17"));
+
+    timeTracker();
 })
-//pull from local storage
-
-$("#8").siblings("textarea" ).val(localStorage.getItem("8")) 
-$("#9").siblings("textarea" ).val(localStorage.getItem("9")) 
-$("#10").siblings("textarea" ).val(localStorage.getItem("10")) 
-$("#11").siblings("textarea" ).val(localStorage.getItem("11")) 
-$("#12").siblings("textarea" ).val(localStorage.getItem("12")) 
-$("#1").siblings("textarea" ).val(localStorage.getItem("1")) 
-$("#2").siblings("textarea" ).val(localStorage.getItem("2")) 
-$("#3").siblings("textarea" ).val(localStorage.getItem("3")) 
-$("#4").siblings("textarea" ).val(localStorage.getItem("4")) 
-$("#5").siblings("textarea" ).val(localStorage.getItem("5")) 
-$("#6").siblings("textarea" ).val(localStorage.getItem("6")) 
-$("#7").siblings("textarea" ).val(localStorage.getItem("7")) 
-$("#8").siblings("textarea" ).val(localStorage.getItem("8")) 
-
-
-
-
-})
-
 
 
 
